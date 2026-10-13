@@ -5,6 +5,8 @@ class PackDeViaje{
     const coordinador
 
     method duracionDias() = duracionDias
+    method beneficiosVigentes() = beneficios.filter({b => b.estaVigente()})
+
 }
 
 
