@@ -3,34 +3,55 @@ class PackDeViaje{
     const precioBase 
     const beneficios = []
     const coordinador
-    method duracionDias(){}
+
+    method duracionDias() = duracionDias
 }
 
 
 class PackNacional inherits PackDeViaje {
-    const provinciaDestino 
     var listaActividad = []
+    const provinciaDestino 
 }
 
 class PackInternacional inherits PackDeViaje {
-    const paisDestino
     var cantEscalas 
+    const paisDestino
     const interes
+
     method esDeInteres() = interes 
 }
 
 class Coordinador {
     var rol
-    const motivado
-    method estaMotivado() = motivado 
     var viajesRealizados
+    const motivado
     const aniosDeExperiencia
 
+    method aniosDeExperiencia() = aniosDeExperiencia 
+    method estaMotivado() = motivado 
+    method viajesRealizados() = viajesRealizados 
 }
 
-class Beneficios {
+class Beneficio {
     var tipoDeBeneficio
     var costo 
     const vigente
+
+    method costo() = costo 
     method estaVigente() = vigente 
 }
+
+object guia {
+    method cumpleCondicion(coordinador) = coordinador.estaMotivado() 
+}
+
+object asistenteLogistico {
+    method cumpleCondicion(coordinador) = coordinador.aniosDeExperiencia() >= 3
+}
+
+object acompaniante {
+    method cumpleCondicion(coordinador) = true
+}
+
+
+    
