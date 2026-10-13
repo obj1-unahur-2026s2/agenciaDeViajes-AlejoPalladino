@@ -1,0 +1,24 @@
+import agenciaDeViajes.*
+
+describe "Precio final" {
+    const coord = new Coordinador(rol = guia, viajesRealizados = 10, motivado = true, aniosDeExperiencia = 2)
+    const vencido = new Beneficio(tipoDeBeneficio = "Seguro", costo = 500, vigente = false)
+
+    test "pack nacional sin beneficios vigentes devuelve el precio base" {
+        const pack = new PackNacional(duracionDias = 5, precioBase = 1000, coordinador = coord, provinciaDestino = "Neuquen", beneficios = [vencido])
+        assert.equals(1000, pack.precioFinal())
+    }
+}
+
+describe "Coordinador altamente calificado" {
+
+    test "un guía motivado con 21 viajes está altamente calificado" {
+        const coord = new Coordinador(rol = guia, viajesRealizados = 21, motivado = true, aniosDeExperiencia = 1)
+        assert.that(coord.esAltamenteCalificado())
+    }
+
+    test "no se puede asignar un rol inválido" {
+        const coord = new Coordinador(rol = guia, viajesRealizados = 5, motivado = true, aniosDeExperiencia = 1)
+        assert.throwsException({ coord.cambiarRol("cocinero") })
+    }
+}

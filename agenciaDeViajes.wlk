@@ -6,8 +6,9 @@ class PackDeViaje{
 
     method duracionDias() = duracionDias
     method beneficiosVigentes() = beneficios.filter({b => b.estaVigente()})
-
+    method precioFinal() = precioBase + self.beneficiosVigentes().sum({b => b.costo()})
 }
+    
 
 
 class PackNacional inherits PackDeViaje {
@@ -21,6 +22,7 @@ class PackInternacional inherits PackDeViaje {
     const interes
 
     method esDeInteres() = interes 
+    override method precioFinal() = super() * 1.2
 }
 
 class Coordinador {
@@ -32,7 +34,16 @@ class Coordinador {
     method aniosDeExperiencia() = aniosDeExperiencia 
     method estaMotivado() = motivado 
     method viajesRealizados() = viajesRealizados 
+    method esAltamenteCalificado() = viajesRealizados > 20 && rol.cumpleCondicion(self)
+    method cambiarRol(nuevoRol) {
+        if (not [guia, asistenteLogistico, acompaniante].contains(nuevoRol)) {
+            self.error("Rol inválido")
+        }
+        rol = nuevoRol
+    }
+
 }
+    
 
 class Beneficio {
     var tipoDeBeneficio
